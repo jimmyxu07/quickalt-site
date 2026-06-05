@@ -1,0 +1,14 @@
+name = "quickalt-api"
+main = "src/index.ts"
+compatibility_date = "2024-06-05"
+
+# Rate limiting: 100 requests per IP per day
+# We implement this in code using KV
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT_KV"
+id = "d1be77dfeb4f4072a79e4fdf5cdb7a79"
+
+[vars]
+# API key set via wrangler secret
+# GEMINI_API_KEY

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickAlt - Free AI Alt Text Generator</title>
+  <meta name="description" content="Generate accurate, accessible alt text for images in seconds. Free, anonymous, and no signup required. Powered by AI.">
+  <meta name="keywords" content="alt text generator, ai alt text, free alt text, image accessibility, alt text tool">
+  <meta name="author" content="QuickAlt">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://quickalt.site/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://quickalt.site/">
+  <meta property="og:title" content="QuickAlt - Free AI Alt Text Generator">
+  <meta property="og:description" content="Generate accurate, accessible alt text for images in seconds. Free, anonymous, and no signup required.">
+  <meta property="og:image" content="https://quickalt.site/assets/og-image.svg">
+  <meta property="og:site_name" content="QuickAlt">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://quickalt.site/">
+  <meta name="twitter:title" content="QuickAlt - Free AI Alt Text Generator">
+  <meta name="twitter:description" content="Generate accurate, accessible alt text for images in seconds. Free, anonymous, and no signup required.">
+  <meta name="twitter:image" content="https://quickalt.site/assets/og-image.svg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚡%3C/text%3E%3C/svg%3E">
+
+  <!-- Plausible Analytics (privacy-friendly) -->
+  <script defer data-domain="quickalt.site" src="https://plausible.io/js/script.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            error: "#ba1a1a",
+            primary: "#0058be",
+            "surface-bright": "#f7f9fb",
+            "surface-container": "#eceef0",
+            "surface-container-low": "#f2f4f6",
+            "surface-container-lowest": "#ffffff",
+            "surface-variant": "#e0e3e5",
+            "surface-tint": "#005ac2",
+            "primary-container": "#2170e4",
+            "primary-fixed": "#d8e2ff",
+            "secondary": "#545f73",
+            "secondary-container": "#d5e0f8",
+            "on-primary": "#ffffff",
+            "on-surface": "#191c1e",
+            "on-surface-variant": "#424754",
+            "outline": "#727785",
+            "outline-variant": "#c2c6d6",
+            "background": "#f7f9fb",
+            "inverse-surface": "#2d3133",
+            "inverse-on-surface": "#eff1f3",
+          },
+          borderRadius: {
+            DEFAULT: "0.125rem",
+            lg: "0.25rem",
+            xl: "0.5rem",
+            full: "0.75rem",
+          },
+          fontSize: {
+            "headline-lg": ["30px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "headline-md": ["20px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "500" }],
+            "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            "label-mono": ["13px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+          },
+          fontFamily: {
+            sans: ["Geist", "system-ui", "sans-serif"],
+            mono: ["Geist Mono", "ui-monospace", "monospace"],
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    body { font-family: "Geist", system-ui, sans-serif; }
+    .font-mono { font-family: "Geist Mono", ui-monospace, monospace; }
+    .animate-pulse-subtle { animation: pulse-subtle 2s ease-in-out infinite; }
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .6; }
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen text-on-surface bg-surface-container-lowest">
+  <!-- Top Navigation -->
+  <nav class="bg-surface-container-lowest border-b border-outline-variant">
+    <div class="max-w-[1280px] mx-auto h-16 px-4 md:px-8 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 text-headline-md font-semibold tracking-tight text-on-surface hover:text-primary transition-colors" aria-label="QuickAlt Home">
+        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+        <span>QuickAlt</span>
+      </a>
+      <div class="flex items-center gap-6">
+        <a href="/about.html" class="hidden sm:inline text-body-md text-on-surface-variant hover:text-primary transition-colors">About</a>
+        <a href="/privacy.html" class="hidden sm:inline text-body-md text-on-surface-variant hover:text-primary transition-colors">Privacy</a>
+        <a href="/terms.html" class="hidden sm:inline text-body-md text-on-surface-variant hover:text-primary transition-colors">Terms</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow w-full max-w-[1280px] mx-auto px-4 md:px-8 py-8 md:py-12 flex flex-col gap-12">
+    <!-- Hero / Upload -->
+    <section class="flex flex-col items-center text-center gap-6" aria-labelledby="hero-title">
+      <h1 id="hero-title" class="text-3xl md:text-4xl font-semibold tracking-tight text-on-surface">Generate Alt Text in Seconds</h1>
+      <p class="text-body-lg text-on-surface-variant max-w-2xl">Free AI alt text generator for images. Drag & drop, click to upload, and get accessible descriptions instantly. No signup required.</p>
+
+      <!-- Upload Zone -->
+      <div
+        id="drop-zone"
+        class="w-full max-w-3xl border-2 border-dashed border-outline-variant hover:border-primary bg-surface transition-colors duration-200 rounded-lg p-8 md:p-12 flex flex-col items-center justify-center gap-4 cursor-pointer group"
+        role="button"
+        tabindex="0"
+        aria-label="Upload image"
+      >
+        <div class="p-4 bg-surface-container rounded-full text-on-surface-variant group-hover:text-primary group-hover:bg-primary-fixed transition-colors duration-200">
+          <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 0;">cloud_upload</span>
+        </div>
+        <div class="text-center">
+          <p class="text-body-md text-on-surface font-medium">Drag and drop your image or <span class="text-primary hover:underline">click to browse</span></p>
+          <p class="text-sm font-mono text-on-surface-variant mt-2 uppercase tracking-wide">Supports PNG, JPG, WEBP, GIF up to 10MB</p>
+        </div>
+        <input accept="image/png,image/jpeg,image/webp,image/gif" class="hidden" id="file-input" type="file" aria-label="Choose image file">
+      </div>
+    </section>
+
+    <!-- Preview & Result -->
+    <section id="result-section" class="hidden w-full max-w-4xl mx-auto border border-surface-variant rounded-lg bg-surface-container-lowest overflow-hidden flex flex-col md:flex-row" aria-live="polite">
+      <!-- Image Preview -->
+      <div class="w-full md:w-1/2 bg-surface-container flex items-center justify-center p-4 min-h-[300px] border-b md:border-b-0 md:border-r border-surface-variant relative group">
+        <img id="preview-image" alt="Uploaded preview" class="object-contain w-full h-full max-h-[400px] rounded" src="">
+        <button id="remove-image" aria-label="Remove image" class="absolute top-3 right-3 bg-surface-container-lowest border border-outline-variant text-on-surface-variant p-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:text-error hover:border-error" title="Remove image">
+          <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">close</span>
+        </button>
+      </div>
+
+      <!-- Alt Text Output -->
+      <div class="w-full md:w-1/2 flex flex-col bg-surface-container-lowest">
+        <div class="bg-surface-container-low px-4 py-3 border-b border-surface-variant flex items-center justify-between">
+          <span class="text-sm font-mono text-on-surface-variant uppercase tracking-wider">Generated Alt Text</span>
+          <span id="status-badge" class="hidden items-center gap-1 text-primary text-sm font-mono bg-primary-fixed px-2 py-1 rounded">
+            <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            <span>Ready</span>
+          </span>
+          <span id="loading-badge" class="inline-flex items-center gap-2 text-on-surface-variant text-sm font-mono bg-surface-container px-2 py-1 rounded">
+            <span class="material-symbols-outlined animate-spin text-[14px]">progress_activity</span>
+            <span>Generating...</span>
+          </span>
+        </div>
+        <div class="p-4 flex-grow flex flex-col">
+          <textarea id="alt-text" class="w-full flex-grow min-h-[160px] bg-transparent border-none text-sm font-mono text-on-surface resize-none focus:ring-0 p-0 leading-relaxed" readonly spellcheck="false" aria-label="Generated alt text"></textarea>
+        </div>
+        <!-- Actions -->
+        <div class="p-4 border-t border-surface-variant flex gap-3 bg-surface-container-lowest">
+          <button id="regenerate-btn" class="flex-1 border border-outline-variant text-on-surface hover:bg-surface-container transition-colors duration-200 py-2 px-4 rounded text-sm font-mono flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0;">refresh</span>
+            Regenerate
+          </button>
+          <button id="copy-btn" class="flex-1 bg-primary text-on-primary hover:bg-surface-tint transition-colors duration-200 py-2 px-4 rounded text-sm font-mono flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
+            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0;">content_copy</span>
+            <span id="copy-label">Copy Text</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto w-full" aria-labelledby="features-title">
+      <h2 id="features-title" class="sr-only">Features</h2>
+      <div class="p-6 border border-surface-variant rounded-lg bg-surface">
+        <div class="flex items-center gap-2 mb-3 text-primary">
+          <span class="material-symbols-outlined">speed</span>
+          <h3 class="text-body-lg font-semibold">Fast</h3>
+        </div>
+        <p class="text-body-md text-on-surface-variant">Get descriptive alt text in seconds. Just upload an image and the AI does the rest.</p>
+      </div>
+      <div class="p-6 border border-surface-variant rounded-lg bg-surface">
+        <div class="flex items-center gap-2 mb-3 text-primary">
+          <span class="material-symbols-outlined">lock</span>
+          <h3 class="text-body-lg font-semibold">Private</h3>
+        </div>
+        <p class="text-body-md text-on-surface-variant">We don't store your images. Files are processed in memory and never saved to our servers.</p>
+      </div>
+      <div class="p-6 border border-surface-variant rounded-lg bg-surface">
+        <div class="flex items-center gap-2 mb-3 text-primary">
+          <span class="material-symbols-outlined">payments</span>
+          <h3 class="text-body-lg font-semibold">Free</h3>
+        </div>
+        <p class="text-body-md text-on-surface-variant">No credit card, no signup, no catch. Free alt text generation for everyday use.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="max-w-3xl mx-auto w-full" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="text-2xl font-semibold text-on-surface mb-6 text-center">Frequently Asked Questions</h2>
+      <div class="flex flex-col gap-4">
+        <details class="group border border-surface-variant rounded-lg bg-surface p-4">
+          <summary class="flex items-center justify-between cursor-pointer list-none text-body-md font-medium text-on-surface">
+            <span>What is alt text?</span>
+            <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <p class="mt-3 text-body-md text-on-surface-variant">Alt text (alternative text) is a written description of an image used by screen readers and search engines to understand visual content. It improves accessibility and SEO.</p>
+        </details>
+        <details class="group border border-surface-variant rounded-lg bg-surface p-4">
+          <summary class="flex items-center justify-between cursor-pointer list-none text-body-md font-medium text-on-surface">
+            <span>Is QuickAlt free to use?</span>
+            <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <p class="mt-3 text-body-md text-on-surface-variant">Yes. QuickAlt is free for everyday use. We may introduce fair usage limits to keep the service available for everyone.</p>
+        </details>
+        <details class="group border border-surface-variant rounded-lg bg-surface p-4">
+          <summary class="flex items-center justify-between cursor-pointer list-none text-body-md font-medium text-on-surface">
+            <span>Do you store my images?</span>
+            <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <p class="mt-3 text-body-md text-on-surface-variant">No. We do not store uploaded images. They are processed temporarily to generate alt text and discarded immediately.</p>
+        </details>
+        <details class="group border border-surface-variant rounded-lg bg-surface p-4">
+          <summary class="flex items-center justify-between cursor-pointer list-none text-body-md font-medium text-on-surface">
+            <span>What image formats are supported?</span>
+            <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
+          </summary>
+          <p class="mt-3 text-body-md text-on-surface-variant">QuickAlt supports PNG, JPG/JPEG, WEBP, and GIF files up to 10MB per image.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-surface-container-lowest border-t border-outline-variant mt-auto">
+    <div class="max-w-[1280px] mx-auto px-4 md:px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+        <span class="text-body-md font-semibold text-on-surface">© <span id="year">2026</span> QuickAlt</span>
+        <span class="text-sm font-mono text-primary bg-primary-fixed px-2 py-1 rounded inline-flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">shield</span>
+          We don't store your images.
+        </span>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-6">
+        <a href="/about.html" class="text-sm font-mono text-on-surface-variant hover:text-primary transition-colors">About</a>
+        <a href="/privacy.html" class="text-sm font-mono text-on-surface-variant hover:text-primary transition-colors">Privacy Policy</a>
+        <a href="/terms.html" class="text-sm font-mono text-on-surface-variant hover:text-primary transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const dropZone = document.getElementById('drop-zone');
+      const fileInput = document.getElementById('file-input');
+      const resultSection = document.getElementById('result-section');
+      const previewImage = document.getElementById('preview-image');
+      const removeBtn = document.getElementById('remove-image');
+      const altText = document.getElementById('alt-text');
+      const copyBtn = document.getElementById('copy-btn');
+      const copyLabel = document.getElementById('copy-label');
+      const regenerateBtn = document.getElementById('regenerate-btn');
+      const statusBadge = document.getElementById('status-badge');
+      const loadingBadge = document.getElementById('loading-badge');
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      const API_BASE_URL = "https://quickalt-api.quickalt-api.workers.dev";
+
+      function setGenerating(isGenerating) {
+        if (isGenerating) {
+          loadingBadge.classList.remove('hidden');
+          loadingBadge.classList.add('inline-flex');
+          statusBadge.classList.add('hidden');
+          statusBadge.classList.remove('inline-flex');
+          altText.value = 'Generating alt text, please wait...';
+          copyBtn.disabled = true;
+          regenerateBtn.disabled = true;
+        } else {
+          loadingBadge.classList.add('hidden');
+          loadingBadge.classList.remove('inline-flex');
+          statusBadge.classList.remove('hidden');
+          statusBadge.classList.add('inline-flex');
+          copyBtn.disabled = false;
+          regenerateBtn.disabled = false;
+        }
+      }
+
+      async function generateMockAltText() {
+        setGenerating(true);
+
+        if (!API_BASE_URL) {
+          // Fallback mock for local testing without backend deployed
+          const MOCK_TEXTS = [
+            "A close-up photograph of a modern workspace with a laptop, notebook, and coffee cup on a clean wooden desk near a bright window.",
+            "An outdoor landscape photo showing a mountain range at sunset with warm orange and purple tones across the sky.",
+            "A candid portrait of a smiling person standing in front of a textured urban wall, wearing casual clothing and natural lighting.",
+            "A product shot of wireless earbuds in a minimalist white charging case against a soft gray background.",
+            "A screenshot of a dashboard interface displaying analytics charts, line graphs, and summary cards in a light color scheme.",
+          ];
+          const delay = 1200 + Math.floor(Math.random() * 1200);
+          setTimeout(() => {
+            const text = MOCK_TEXTS[Math.floor(Math.random() * MOCK_TEXTS.length)];
+            altText.value = text;
+            setGenerating(false);
+            try { plausible && plausible('Alt Generated'); } catch (e) {}
+          }, delay);
+          return;
+        }
+
+        try {
+          const base64Image = previewImage.src;
+          const response = await fetch(`${API_BASE_URL}/generate`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ image: base64Image }),
+          });
+
+          if (!response.ok) {
+            const err = await response.json();
+            throw new Error(err.error || `API error: ${response.status}`);
+          }
+
+          const data = await response.json();
+          altText.value = data.alt_text;
+          setGenerating(false);
+          try { plausible && plausible('Alt Generated'); } catch (e) {}
+        } catch (err) {
+          altText.value = "Error: " + (err.message || "Failed to generate alt text. Please try again.");
+          setGenerating(false);
+        }
+      }
+
+      function handleFile(file) {
+        if (!file || !file.type.startsWith('image/')) {
+          alert('Please upload a valid image file (PNG, JPG, WEBP, GIF).');
+          return;
+        }
+        if (file.size > 10 * 1024 * 1024) {
+          alert('File size exceeds 10MB limit.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          previewImage.src = e.target.result;
+          resultSection.classList.remove('hidden');
+          resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          generateMockAltText();
+        };
+        reader.readAsDataURL(file);
+      }
+
+      dropZone.addEventListener('click', () => fileInput.click());
+      dropZone.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          fileInput.click();
+        }
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+      });
+
+      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach((name) => {
+        dropZone.addEventListener(name, (e) => { e.preventDefault(); e.stopPropagation(); }, false);
+      });
+
+      ['dragenter', 'dragover'].forEach((name) => {
+        dropZone.addEventListener(name, () => {
+          dropZone.classList.add('border-primary', 'bg-primary-fixed');
+          dropZone.classList.remove('border-outline-variant', 'bg-surface');
+        }, false);
+      });
+
+      ['dragleave', 'drop'].forEach((name) => {
+        dropZone.addEventListener(name, () => {
+          dropZone.classList.remove('border-primary', 'bg-primary-fixed');
+          dropZone.classList.add('border-outline-variant', 'bg-surface');
+        }, false);
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        if (dt.files && dt.files[0]) handleFile(dt.files[0]);
+      }, false);
+
+      removeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        previewImage.src = '';
+        altText.value = '';
+        fileInput.value = '';
+        resultSection.classList.add('hidden');
+        copyLabel.textContent = 'Copy Text';
+      });
+
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(altText.value);
+          const prev = copyLabel.textContent;
+          copyLabel.textContent = 'Copied!';
+          setTimeout(() => { copyLabel.textContent = prev; }, 1500);
+          try { plausible && plausible('Copy Text'); } catch (e) {}
+        } catch (err) {
+          copyLabel.textContent = 'Failed';
+          setTimeout(() => { copyLabel.textContent = 'Copy Text'; }, 1500);
+        }
+      });
+
+      regenerateBtn.addEventListener('click', () => {
+        generateMockAltText();
+        try { plausible && plausible('Regenerate'); } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>

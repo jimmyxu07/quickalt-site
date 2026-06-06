@@ -140,6 +140,26 @@
       </div>
     </section>
 
+    <!-- Language Selector -->
+    <section class="w-full max-w-3xl mx-auto mt-4 flex items-center justify-center gap-2">
+      <span class="material-symbols-outlined text-sm text-on-surface-variant" style="font-variation-settings: 'FILL' 1;">translate</span>
+      <label for="language-select" class="text-sm text-on-surface-variant font-mono">Output Language</label>
+      <select id="language-select" class="bg-surface border border-outline-variant text-on-surface text-sm rounded px-3 py-1.5 focus:outline-none focus:border-primary cursor-pointer">
+        <option value="en">English</option>
+        <option value="zh">中文</option>
+        <option value="ja">日本語</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="ko">한국어</option>
+        <option value="pt">Português</option>
+        <option value="it">Italiano</option>
+        <option value="ru">Русский</option>
+        <option value="ar">العربية</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+    </section>
+
     <!-- Preview & Result -->
     <section id="result-section" class="hidden w-full max-w-4xl mx-auto border border-surface-variant rounded-lg bg-surface-container-lowest overflow-hidden flex flex-col md:flex-row" aria-live="polite">
       <!-- Image Preview -->
@@ -320,12 +340,13 @@
         }
 
         try {
-          const base64Image = previewImage.src;
-          const response = await fetch(`${API_BASE_URL}/generate`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ image: base64Image }),
-          });
+      const base64Image = previewImage.src;
+      const language = document.getElementById('language-select').value;
+      const response = await fetch(`${API_BASE_URL}/generate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: base64Image, language }),
+      });
 
           if (!response.ok) {
             const err = await response.json();

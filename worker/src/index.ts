@@ -18,8 +18,10 @@ const PROMPT = `You are an expert at writing accessible, descriptive alt text fo
 const PROMPT_RETRY = `Your previous description was too brief. Write a MUCH longer and more comprehensive description covering every visible detail. Write at least 5 complete sentences. Do not stop mid-sentence. End with a complete sentence and a period.`;
 
 function truncateToLastSentence(text: string): string {
-  const match = text.match(/^(.*?[.!?])(?:\s+[^.!?]*)?$/s);
-  return match ? match[1].trim() : text;
+  // 先清理掉乱码字符“”（U+FFFD）
+  const cleaned = text.replace(/\uFFFD/g, '');
+  const match = cleaned.match(/^(.*?[.!?\u3002\uff01\uff1f])(?:\s+[^.!?\u3002\uff01\uff1f]*)?$/s);
+  return match ? match[1].trim() : cleaned;
 }
 
 const LANG_NAMES: Record<string, string> = {
@@ -71,11 +73,11 @@ function parseBase64Image(base64Image: string): { mimeType: string; data: string
 }
 
 function countSentences(text: string): number {
-  return (text.match(/[.!?]+/g) || []).length;
+  return (text.match(/[.!?\u3002\uff01\uff1f]+/g) || []).length;
 }
 
 function isGoodQuality(text: string): boolean {
-  return text.length >= 200 && countSentences(text) >= 3 && /[.!?"']$/.test(text.slice(-1));
+  return text.length >= 200 && countSentences(text) >= 3 && /[.!?"'\u3002\uff01\uff1f]$/.test(text.slice(-1));
 }
 
 async function callGemini(

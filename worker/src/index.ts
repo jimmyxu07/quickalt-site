@@ -11,7 +11,37 @@ const CORS_HEADERS: Record<string, string> = {
 };
 
 const DAILY_LIMIT = 100;
-const GEMINI_MODEL = "gemini-1.5-flash";
+const GEMINI_MODEL = "gemini-3.5-flash";
+
+const PROMPT = `You are an expert at writing accessible, descriptive alt text for images. Write 4-6 complete sentences covering the main subject, background, lighting, and mood. You MUST end with a complete sentence and a period. Never stop mid-sentence.`;
+
+const PROMPT_RETRY = `Your previous description was too brief. Write a MUCH longer and more comprehensive description covering every visible detail. Write at least 5 complete sentences. Do not stop mid-sentence. End with a complete sentence and a period.`;
+
+function truncateToLastSentence(text: string): string {
+  const match = text.match(/^(.*?[.!?])(?:\s+[^.!?]*)?$/s);
+  return match ? match[1].trim() : text;
+}
+
+const LANG_NAMES: Record<string, string> = {
+  en: "English",
+  zh: "Chinese",
+  ja: "Japanese",
+  es: "Spanish",
+  fr: "French",
+  de: "German",
+  ko: "Korean",
+  pt: "Portuguese",
+  it: "Italian",
+  ru: "Russian",
+  ar: "Arabic",
+  hi: "Hindi",
+};
+
+function getPrompt(basePrompt: string, langCode: string): string {
+  const langName = LANG_NAMES[langCode] || LANG_NAMES["en"];
+  if (langName === "English") return basePrompt;
+  return `${basePrompt}\n\nWrite the description in ${langName}.`;
+}
 
 function getClientIP(request: Request): string {
   const cf = request.headers.get("CF-Connecting-IP");
@@ -32,18 +62,28 @@ async function checkRateLimit(kv: KVNamespace, ip: string): Promise<{ allowed: b
   return { allowed: true, remaining: DAILY_LIMIT - count - 1 };
 }
 
-function parseBase64Image(dataUrl: string): { mimeType: string; data: string } {
-  const match = dataUrl.match(/^data:(image\/\w+);base64,(.+)$/);
+function parseBase64Image(base64Image: string): { mimeType: string; data: string } {
+  const match = base64Image.match(/^data:([^;]+);base64,(.+)$/);
   if (match) {
     return { mimeType: match[1], data: match[2] };
   }
-  // Fallback: assume raw base64 jpeg
-  return { mimeType: "image/jpeg", data: dataUrl };
+  return { mimeType: "image/jpeg", data: base64Image };
 }
 
-async function callGemini(base64Image: string, apiKey: string): Promise<string> {
-  const { mimeType, data } = parseBase64Image(base64Image);
+function countSentences(text: string): number {
+  return (text.match(/[.!?]+/g) || []).length;
+}
 
+function isGoodQuality(text: string): boolean {
+  return text.length >= 200 && countSentences(text) >= 3 && /[.!?"']$/.test(text.slice(-1));
+}
+
+async function callGemini(
+  mimeType: string,
+  data: string,
+  apiKey: string,
+  instruction: string
+): Promise<string> {
   const response = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`,
     {
@@ -54,20 +94,13 @@ async function callGemini(base64Image: string, apiKey: string): Promise<string> 
           {
             role: "user",
             parts: [
-              {
-                text: "You are an expert at writing accessible, descriptive alt text for images. Provide a concise, accurate description suitable for screen readers and SEO. Keep it under 150 words. Focus on what is visually important. Do not start with phrases like 'image of' or 'picture of' unless necessary. Write alt text for this image:",
-              },
-              {
-                inlineData: {
-                  mimeType,
-                  data,
-                },
-              },
+              { text: instruction },
+              { inlineData: { mimeType, data } },
             ],
           },
         ],
         generationConfig: {
-          maxOutputTokens: 300,
+          maxOutputTokens: 1500,
           temperature: 0.3,
         },
       }),
@@ -79,12 +112,53 @@ async function callGemini(base64Image: string, apiKey: string): Promise<string> 
     throw new Error(`Gemini API error: ${response.status} ${text}`);
   }
 
-  const result = await response.json() as any;
-  const text = result.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "";
-  if (!text) {
+  const responseData = (await response.json()) as any;
+  const content = responseData.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "";
+  if (!content) {
     throw new Error("Gemini returned empty alt text");
   }
-  return text;
+  return content;
+}
+
+async function generateAltText(base64Image: string, apiKey: string, langCode: string = "en"): Promise<{ text: string; incomplete?: boolean }> {
+  const { mimeType, data } = parseBase64Image(base64Image);
+
+  const prompts = [
+    getPrompt(PROMPT, langCode),
+    getPrompt(PROMPT_RETRY, langCode),
+    getPrompt("Describe this image in extensive detail as if explaining it to someone who cannot see it. Include the subject, background, colors, lighting, and atmosphere. Write 5-7 complete sentences. End with a complete sentence and a period.", langCode),
+    getPrompt("Provide a rich, vivid description of this image for accessibility purposes. Cover all visible elements, spatial relationships, and mood. Write at least 5 complete sentences. Finish with a period.", langCode),
+    getPrompt("Create a comprehensive alt text for this image. Describe the scene, objects, people, colors, and emotional tone in detail. Use 5-6 complete sentences. End with a complete sentence and a period.", langCode),
+  ];
+
+  let bestResult = "";
+  let lastError: Error | null = null;
+
+  for (let i = 0; i < prompts.length; i++) {
+    try {
+      const result = await callGemini(mimeType, data, apiKey, prompts[i]);
+      if (result.length > bestResult.length) bestResult = result;
+      if (isGoodQuality(result)) {
+        return { text: result };
+      }
+    } catch (err: any) {
+      lastError = err;
+      console.error(`Attempt ${i + 1} failed:`, err);
+    }
+  }
+
+  if (!bestResult && lastError) {
+    throw lastError;
+  }
+
+  // Fallback: truncate to last complete sentence
+  const truncated = truncateToLastSentence(bestResult);
+  if (truncated !== bestResult) {
+    return { text: truncated };
+  }
+
+  // No complete sentence found
+  return { text: bestResult, incomplete: true };
 }
 
 export default {
@@ -126,7 +200,7 @@ export default {
     }
 
     try {
-      const body = await request.json() as { image?: string };
+      const body = (await request.json()) as { image?: string; language?: string };
       if (!body.image || typeof body.image !== "string") {
         return new Response(
           JSON.stringify({ error: "Missing or invalid 'image' field (base64 string required)" }),
@@ -134,10 +208,11 @@ export default {
         );
       }
 
-      const altText = await callGemini(body.image, env.GEMINI_API_KEY);
+      const langCode = (body.language || "en").toLowerCase().trim();
+      const { text: altText, incomplete } = await generateAltText(body.image, env.GEMINI_API_KEY, langCode);
 
       return new Response(
-        JSON.stringify({ alt_text: altText, source: "gemini", remaining }),
+        JSON.stringify({ alt_text: altText, source: "gemini", language: langCode, remaining, ...(incomplete ? { incomplete: true } : {}) }),
         {
           status: 200,
           headers: {

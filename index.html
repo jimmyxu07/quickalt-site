@@ -151,12 +151,6 @@
         <option value="es">Español</option>
         <option value="fr">Français</option>
         <option value="de">Deutsch</option>
-        <option value="ko">한국어</option>
-        <option value="pt">Português</option>
-        <option value="it">Italiano</option>
-        <option value="ru">Русский</option>
-        <option value="ar">العربية</option>
-        <option value="hi">हिन्दी</option>
       </select>
     </section>
 
@@ -637,6 +631,9 @@
 
           const data = await response.json();
           altText.value = data.alt_text;
+          if (data.incomplete) {
+            altText.value += "\n\n[内容可能不完整 / Content may be incomplete]";
+          }
           setGenerating(false);
           try { plausible && plausible('Alt Generated'); } catch (e) {}
         } catch (err) {

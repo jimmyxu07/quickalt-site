@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QuickAlt - Free AI Alt Text Generator</title>
+  <title data-i18n="page_title">QuickAlt - Free AI Alt Text Generator</title>
   <meta name="description" content="Generate accurate, accessible alt text for images in seconds. Free, anonymous, and no signup required. Powered by AI.">
   <meta name="keywords" content="alt text generator, ai alt text, free alt text, image accessibility, alt text tool">
   <meta name="author" content="QuickAlt">
@@ -107,9 +107,9 @@
         <span>QuickAlt</span>
       </a>
       <div class="flex items-center gap-6">
-        <a href="/about.html" class="hidden sm:inline text-body-md text-on-surface-variant hover:text-primary transition-colors">About</a>
-        <a href="/privacy.html" class="hidden sm:inline text-body-md text-on-surface-variant hover:text-primary transition-colors">Privacy</a>
-        <a href="/terms.html" class="hidden sm:inline text-body-md text-on-surface-variant hover:text-primary transition-colors">Terms</a>
+        <a href="/about.html" class="hidden sm:inline text-body-md text-on-surface-variant hover:text-primary transition-colors" data-i18n="nav_about">About</a>
+        <a href="/privacy.html" class="hidden sm:inline text-body-md text-on-surface-variant hover:text-primary transition-colors" data-i18n="nav_privacy">Privacy</a>
+        <a href="/terms.html" class="hidden sm:inline text-body-md text-on-surface-variant hover:text-primary transition-colors" data-i18n="nav_terms">Terms</a>
       </div>
     </div>
   </nav>
@@ -118,8 +118,8 @@
   <main class="flex-grow w-full max-w-[1280px] mx-auto px-4 md:px-8 py-8 md:py-12 flex flex-col gap-12">
     <!-- Hero / Upload -->
     <section class="flex flex-col items-center text-center gap-6" aria-labelledby="hero-title">
-      <h1 id="hero-title" class="text-3xl md:text-4xl font-semibold tracking-tight text-on-surface">Generate Alt Text in Seconds</h1>
-      <p class="text-body-lg text-on-surface-variant max-w-2xl">Free AI alt text generator for images. Drag & drop, click to upload, and get accessible descriptions instantly. No signup required.</p>
+      <h1 id="hero-title" class="text-3xl md:text-4xl font-semibold tracking-tight text-on-surface" data-i18n="hero_title">Generate Alt Text in Seconds</h1>
+      <p class="text-body-lg text-on-surface-variant max-w-2xl" data-i18n="hero_desc">Free AI alt text generator for images. Drag & drop, click to upload, and get accessible descriptions instantly. No signup required.</p>
 
       <!-- Upload Zone -->
       <div
@@ -133,8 +133,8 @@
           <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 0;">cloud_upload</span>
         </div>
         <div class="text-center">
-          <p class="text-body-md text-on-surface font-medium">Drag and drop your image or <span class="text-primary hover:underline">click to browse</span></p>
-          <p class="text-sm font-mono text-on-surface-variant mt-2 uppercase tracking-wide">Supports PNG, JPG, WEBP, GIF up to 10MB</p>
+          <p class="text-body-md text-on-surface font-medium" data-i18n="drop_text">Drag and drop your image or <span class="text-primary hover:underline">click to browse</span></p>
+          <p class="text-sm font-mono text-on-surface-variant mt-2 uppercase tracking-wide" data-i18n="drop_subtext">Supports PNG, JPG, WEBP, GIF up to 10MB</p>
         </div>
         <input accept="image/png,image/jpeg,image/webp,image/gif" class="hidden" id="file-input" type="file" aria-label="Choose image file">
       </div>
@@ -143,7 +143,7 @@
     <!-- Language Selector -->
     <section class="w-full max-w-3xl mx-auto mt-4 flex items-center justify-center gap-2">
       <span class="material-symbols-outlined text-sm text-on-surface-variant" style="font-variation-settings: 'FILL' 1;">translate</span>
-      <label for="language-select" class="text-sm text-on-surface-variant font-mono">Output Language</label>
+      <label for="language-select" class="text-sm text-on-surface-variant font-mono" data-i18n="output_lang">Output Language</label>
       <select id="language-select" class="bg-surface border border-outline-variant text-on-surface text-sm rounded px-3 py-1.5 focus:outline-none focus:border-primary cursor-pointer">
         <option value="en">English</option>
         <option value="zh">中文</option>
@@ -173,14 +173,14 @@
       <!-- Alt Text Output -->
       <div class="w-full md:w-1/2 flex flex-col bg-surface-container-lowest">
         <div class="bg-surface-container-low px-4 py-3 border-b border-surface-variant flex items-center justify-between">
-          <span class="text-sm font-mono text-on-surface-variant uppercase tracking-wider">Generated Alt Text</span>
+          <span class="text-sm font-mono text-on-surface-variant uppercase tracking-wider" data-i18n="result_label">Generated Alt Text</span>
           <span id="status-badge" class="hidden items-center gap-1 text-primary text-sm font-mono bg-primary-fixed px-2 py-1 rounded">
             <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-            <span>Ready</span>
+            <span data-i18n="status_ready">Ready</span>
           </span>
           <span id="loading-badge" class="inline-flex items-center gap-2 text-on-surface-variant text-sm font-mono bg-surface-container px-2 py-1 rounded">
             <span class="material-symbols-outlined animate-spin text-[14px]">progress_activity</span>
-            <span>Generating...</span>
+            <span data-i18n="status_generating">Generating...</span>
           </span>
         </div>
         <div class="p-4 flex-grow flex flex-col">
@@ -190,11 +190,11 @@
         <div class="p-4 border-t border-surface-variant flex gap-3 bg-surface-container-lowest">
           <button id="regenerate-btn" class="flex-1 border border-outline-variant text-on-surface hover:bg-surface-container transition-colors duration-200 py-2 px-4 rounded text-sm font-mono flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
             <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0;">refresh</span>
-            Regenerate
+            <span data-i18n="btn_regenerate">Regenerate</span>
           </button>
           <button id="copy-btn" class="flex-1 bg-primary text-on-primary hover:bg-surface-tint transition-colors duration-200 py-2 px-4 rounded text-sm font-mono flex items-center justify-center gap-2 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
             <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0;">content_copy</span>
-            <span id="copy-label">Copy Text</span>
+            <span id="copy-label" data-i18n="btn_copy">Copy Text</span>
           </button>
         </div>
       </div>
@@ -206,57 +206,57 @@
       <div class="p-6 border border-surface-variant rounded-lg bg-surface">
         <div class="flex items-center gap-2 mb-3 text-primary">
           <span class="material-symbols-outlined">speed</span>
-          <h3 class="text-body-lg font-semibold">Fast</h3>
+          <h3 class="text-body-lg font-semibold" data-i18n="feature_fast_title">Fast</h3>
         </div>
-        <p class="text-body-md text-on-surface-variant">Get descriptive alt text in seconds. Just upload an image and the AI does the rest.</p>
+        <p class="text-body-md text-on-surface-variant" data-i18n="feature_fast_desc">Get descriptive alt text in seconds. Just upload an image and the AI does the rest.</p>
       </div>
       <div class="p-6 border border-surface-variant rounded-lg bg-surface">
         <div class="flex items-center gap-2 mb-3 text-primary">
           <span class="material-symbols-outlined">lock</span>
-          <h3 class="text-body-lg font-semibold">Private</h3>
+          <h3 class="text-body-lg font-semibold" data-i18n="feature_private_title">Private</h3>
         </div>
-        <p class="text-body-md text-on-surface-variant">We don't store your images. Files are processed in memory and never saved to our servers.</p>
+        <p class="text-body-md text-on-surface-variant" data-i18n="feature_private_desc">We don't store your images. Files are processed in memory and never saved to our servers.</p>
       </div>
       <div class="p-6 border border-surface-variant rounded-lg bg-surface">
         <div class="flex items-center gap-2 mb-3 text-primary">
           <span class="material-symbols-outlined">payments</span>
-          <h3 class="text-body-lg font-semibold">Free</h3>
+          <h3 class="text-body-lg font-semibold" data-i18n="feature_free_title">Free</h3>
         </div>
-        <p class="text-body-md text-on-surface-variant">No credit card, no signup, no catch. Free alt text generation for everyday use.</p>
+        <p class="text-body-md text-on-surface-variant" data-i18n="feature_free_desc">No credit card, no signup, no catch. Free alt text generation for everyday use.</p>
       </div>
     </section>
 
     <!-- FAQ -->
     <section class="max-w-3xl mx-auto w-full" aria-labelledby="faq-title">
-      <h2 id="faq-title" class="text-2xl font-semibold text-on-surface mb-6 text-center">Frequently Asked Questions</h2>
+      <h2 id="faq-title" class="text-2xl font-semibold text-on-surface mb-6 text-center" data-i18n="faq_title">Frequently Asked Questions</h2>
       <div class="flex flex-col gap-4">
         <details class="group border border-surface-variant rounded-lg bg-surface p-4">
           <summary class="flex items-center justify-between cursor-pointer list-none text-body-md font-medium text-on-surface">
-            <span>What is alt text?</span>
+            <span data-i18n="faq_q1">What is alt text?</span>
             <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
           </summary>
-          <p class="mt-3 text-body-md text-on-surface-variant">Alt text (alternative text) is a written description of an image used by screen readers and search engines to understand visual content. It improves accessibility and SEO.</p>
+          <p class="mt-3 text-body-md text-on-surface-variant" data-i18n="faq_a1">Alt text (alternative text) is a written description of an image used by screen readers and search engines to understand visual content. It improves accessibility and SEO.</p>
         </details>
         <details class="group border border-surface-variant rounded-lg bg-surface p-4">
           <summary class="flex items-center justify-between cursor-pointer list-none text-body-md font-medium text-on-surface">
-            <span>Is QuickAlt free to use?</span>
+            <span data-i18n="faq_q2">Is QuickAlt free to use?</span>
             <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
           </summary>
-          <p class="mt-3 text-body-md text-on-surface-variant">Yes. QuickAlt is free for everyday use. We may introduce fair usage limits to keep the service available for everyone.</p>
+          <p class="mt-3 text-body-md text-on-surface-variant" data-i18n="faq_a2">Yes. QuickAlt is free for everyday use. We may introduce fair usage limits to keep the service available for everyone.</p>
         </details>
         <details class="group border border-surface-variant rounded-lg bg-surface p-4">
           <summary class="flex items-center justify-between cursor-pointer list-none text-body-md font-medium text-on-surface">
-            <span>Do you store my images?</span>
+            <span data-i18n="faq_q3">Do you store my images?</span>
             <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
           </summary>
-          <p class="mt-3 text-body-md text-on-surface-variant">No. We do not store uploaded images. They are processed temporarily to generate alt text and discarded immediately.</p>
+          <p class="mt-3 text-body-md text-on-surface-variant" data-i18n="faq_a3">No. We do not store uploaded images. They are processed temporarily to generate alt text and discarded immediately.</p>
         </details>
         <details class="group border border-surface-variant rounded-lg bg-surface p-4">
           <summary class="flex items-center justify-between cursor-pointer list-none text-body-md font-medium text-on-surface">
-            <span>What image formats are supported?</span>
+            <span data-i18n="faq_q4">What image formats are supported?</span>
             <span class="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
           </summary>
-          <p class="mt-3 text-body-md text-on-surface-variant">QuickAlt supports PNG, JPG/JPEG, WEBP, and GIF files up to 10MB per image.</p>
+          <p class="mt-3 text-body-md text-on-surface-variant" data-i18n="faq_a4">QuickAlt supports PNG, JPG/JPEG, WEBP, and GIF files up to 10MB per image.</p>
         </details>
       </div>
     </section>
@@ -266,22 +266,304 @@
   <footer class="bg-surface-container-lowest border-t border-outline-variant mt-auto">
     <div class="max-w-[1280px] mx-auto px-4 md:px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
       <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-        <span class="text-body-md font-semibold text-on-surface">© <span id="year">2026</span> QuickAlt</span>
+        <span class="text-body-md font-semibold text-on-surface" data-i18n="footer_copyright">© <span id="year">2026</span> QuickAlt</span>
         <span class="text-sm font-mono text-primary bg-primary-fixed px-2 py-1 rounded inline-flex items-center gap-1">
           <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">shield</span>
-          We don't store your images.
+          <span data-i18n="footer_badge">We don't store your images.</span>
         </span>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-6">
-        <a href="/about.html" class="text-sm font-mono text-on-surface-variant hover:text-primary transition-colors">About</a>
-        <a href="/privacy.html" class="text-sm font-mono text-on-surface-variant hover:text-primary transition-colors">Privacy Policy</a>
-        <a href="/terms.html" class="text-sm font-mono text-on-surface-variant hover:text-primary transition-colors">Terms of Service</a>
+        <a href="/about.html" class="text-sm font-mono text-on-surface-variant hover:text-primary transition-colors" data-i18n="footer_about">About</a>
+        <a href="/privacy.html" class="text-sm font-mono text-on-surface-variant hover:text-primary transition-colors" data-i18n="footer_privacy">Privacy Policy</a>
+        <a href="/terms.html" class="text-sm font-mono text-on-surface-variant hover:text-primary transition-colors" data-i18n="footer_terms">Terms of Service</a>
       </div>
     </div>
   </footer>
 
   <script>
     (function () {
+
+  const translations = {
+    en: {
+      page_title: "QuickAlt - Free AI Alt Text Generator",
+      nav_about: "About",
+      nav_privacy: "Privacy",
+      nav_terms: "Terms",
+      hero_title: "Generate Alt Text in Seconds",
+      hero_desc: "Free AI alt text generator for images. Drag & drop, click to upload, and get accessible descriptions instantly. No signup required.",
+      drop_text: 'Drag and drop your image or <span class="text-primary hover:underline">click to browse</span>',
+      drop_subtext: "Supports PNG, JPG, WEBP, GIF up to 10MB",
+      output_lang: "Output Language",
+      result_label: "Generated Alt Text",
+      status_ready: "Ready",
+      status_generating: "Generating...",
+      btn_regenerate: "Regenerate",
+      btn_copy: "Copy Text",
+      copied_feedback: "Copied!",
+      copied_failed: "Failed",
+      feature_fast_title: "Fast",
+      feature_fast_desc: "Get descriptive alt text in seconds. Just upload an image and the AI does the rest.",
+      feature_private_title: "Private",
+      feature_private_desc: "We don't store your images. Files are processed in memory and never saved to our servers.",
+      feature_free_title: "Free",
+      feature_free_desc: "No credit card, no signup, no catch. Free alt text generation for everyday use.",
+      faq_title: "Frequently Asked Questions",
+      faq_q1: "What is alt text?",
+      faq_a1: "Alt text (alternative text) is a written description of an image used by screen readers and search engines to understand visual content. It improves accessibility and SEO.",
+      faq_q2: "Is QuickAlt free to use?",
+      faq_a2: "Yes. QuickAlt is free for everyday use. We may introduce fair usage limits to keep the service available for everyone.",
+      faq_q3: "Do you store my images?",
+      faq_a3: "No. We do not store uploaded images. They are processed temporarily to generate alt text and discarded immediately.",
+      faq_q4: "What image formats are supported?",
+      faq_a4: "QuickAlt supports PNG, JPG/JPEG, WEBP, and GIF files up to 10MB per image.",
+      footer_about: "About",
+      footer_privacy: "Privacy Policy",
+      footer_terms: "Terms of Service",
+      footer_copyright: '© <span id="year">2026</span> QuickAlt',
+      footer_badge: "We don't store your images.",
+      alert_invalid: "Please upload a valid image file (PNG, JPG, WEBP, GIF).",
+      alert_size: "File size exceeds 10MB limit.",
+      generating_placeholder: "Generating alt text, please wait...",
+      error_prefix: "Error: ",
+    },
+    zh: {
+      page_title: "QuickAlt - 免费 AI 替代文本生成器",
+      nav_about: "关于",
+      nav_privacy: "隐私",
+      nav_terms: "条款",
+      hero_title: "几秒钟生成替代文本",
+      hero_desc: "免费的 AI 图片替代文本生成器。拖放或点击上传，即可立即获得无障碍描述。无需注册。",
+      drop_text: '拖放图片到此处，或<span class="text-primary hover:underline">点击浏览</span>',
+      drop_subtext: "支持 PNG、JPG、WEBP、GIF，最大 10MB",
+      output_lang: "输出语言",
+      result_label: "生成的替代文本",
+      status_ready: "就绪",
+      status_generating: "生成中...",
+      btn_regenerate: "重新生成",
+      btn_copy: "复制文本",
+      copied_feedback: "已复制！",
+      copied_failed: "失败",
+      feature_fast_title: "快速",
+      feature_fast_desc: "几秒钟即可获得描述性替代文本。只需上传图片，AI 即可完成其余工作。",
+      feature_private_title: "隐私",
+      feature_private_desc: "我们不存储您的图片。文件仅在内存中处理，永远不会保存到我们的服务器。",
+      feature_free_title: "免费",
+      feature_free_desc: "无需信用卡，无需注册，没有任何套路。免费生成日常使用的替代文本。",
+      faq_title: "常见问题",
+      faq_q1: "什么是替代文本？",
+      faq_a1: "替代文本（alt text）是图片的文字描述，供屏幕阅读器和搜索引擎理解视觉内容。它有助于提升无障碍体验和搜索引擎优化。",
+      faq_q2: "QuickAlt 是免费的吗？",
+      faq_a2: "是的。QuickAlt 供日常免费使用。我们可能会引入公平使用限制，以确保所有人都能使用本服务。",
+      faq_q3: "你们会存储我的图片吗？",
+      faq_a3: "不会。我们不存储上传的图片。它们仅被临时处理以生成替代文本，随后立即删除。",
+      faq_q4: "支持哪些图片格式？",
+      faq_a4: "QuickAlt 支持 PNG、JPG/JPEG、WEBP 和 GIF 文件，每张图片最大 10MB。",
+      footer_about: "关于",
+      footer_privacy: "隐私政策",
+      footer_terms: "服务条款",
+      footer_copyright: '© <span id="year">2026</span> QuickAlt',
+      footer_badge: "我们不存储您的图片。",
+      alert_invalid: "请上传有效的图片文件（PNG、JPG、WEBP、GIF）。",
+      alert_size: "文件大小超过 10MB 限制。",
+      generating_placeholder: "正在生成替代文本，请稍候...",
+      error_prefix: "错误：",
+    },
+    ja: {
+      page_title: "QuickAlt - 無料AI代替テキスト生成ツール",
+      nav_about: "概要",
+      nav_privacy: "プライバシー",
+      nav_terms: "規約",
+      hero_title: "数秒で代替テキストを生成",
+      hero_desc: "無料のAI画像代替テキスト生成ツール。ドラッグ＆ドロップまたはクリックでアップロードし、すぐにアクセシブルな説明を取得。登録不要。",
+      drop_text: '画像をドラッグ＆ドロップするか、<span class="text-primary hover:underline">クリックして参照</span>',
+      drop_subtext: "PNG、JPG、WEBP、GIFに対応、最大10MB",
+      output_lang: "出力言語",
+      result_label: "生成された代替テキスト",
+      status_ready: "完了",
+      status_generating: "生成中...",
+      btn_regenerate: "再生成",
+      btn_copy: "テキストをコピー",
+      copied_feedback: "コピーしました！",
+      copied_failed: "失敗",
+      feature_fast_title: "高速",
+      feature_fast_desc: "数秒で説明的な代替テキストを取得。画像をアップロードするだけで、AIが残りを処理します。",
+      feature_private_title: "プライバシー",
+      feature_private_desc: "画像は保存しません。ファイルはメモリ内で処理され、サーバーには保存されません。",
+      feature_free_title: "無料",
+      feature_free_desc: "クレジットカード不要、登録不要、追加料金なし。日常使いの代替テキスト生成を無料で提供。",
+      faq_title: "よくある質問",
+      faq_q1: "代替テキストとは？",
+      faq_a1: "代替テキスト（alt text）は、スクリーンリーダーや検索エンジンが視覚コンテンツを理解するための画像の文章による説明です。アクセシビリティとSEOの向上に役立ちます。",
+      faq_q2: "QuickAltは無料で使えますか？",
+      faq_a2: "はい。QuickAltは日常利用で無料です。すべての人が利用できるように、公正な利用制限を導入する可能性があります。",
+      faq_q3: "画像は保存されますか？",
+      faq_a3: "いいえ。アップロードされた画像は保存しません。代替テキストを生成するために一時的に処理され、直ちに破棄されます。",
+      faq_q4: "対応している画像形式は？",
+      faq_a4: "QuickAltはPNG、JPG/JPEG、WEBP、GIFファイルに対応しており、1枚あたり最大10MBです。",
+      footer_about: "概要",
+      footer_privacy: "プライバシーポリシー",
+      footer_terms: "利用規約",
+      footer_copyright: '© <span id="year">2026</span> QuickAlt',
+      footer_badge: "画像は保存しません。",
+      alert_invalid: "有効な画像ファイルをアップロードしてください（PNG、JPG、WEBP、GIF）。",
+      alert_size: "ファイルサイズが10MBの制限を超えています。",
+      generating_placeholder: "代替テキストを生成中です。しばらくお待ちください...",
+      error_prefix: "エラー：",
+    },
+    es: {
+      page_title: "QuickAlt - Generador Gratuito de Texto Alternativo con IA",
+      nav_about: "Acerca de",
+      nav_privacy: "Privacidad",
+      nav_terms: "Términos",
+      hero_title: "Genera Texto Alternativo en Segundos",
+      hero_desc: "Generador gratuito de texto alternativo para imágenes con IA. Arrastra y suelta, haz clic para subir y obtén descripciones accesibles al instante. Sin registro.",
+      drop_text: 'Arrastra y suelta tu imagen o <span class="text-primary hover:underline">haz clic para explorar</span>',
+      drop_subtext: "Soporta PNG, JPG, WEBP, GIF hasta 10MB",
+      output_lang: "Idioma de Salida",
+      result_label: "Texto Alternativo Generado",
+      status_ready: "Listo",
+      status_generating: "Generando...",
+      btn_regenerate: "Regenerar",
+      btn_copy: "Copiar Texto",
+      copied_feedback: "¡Copiado!",
+      copied_failed: "Error",
+      feature_fast_title: "Rápido",
+      feature_fast_desc: "Obtén texto alternativo descriptivo en segundos. Solo sube una imagen y la IA hace el resto.",
+      feature_private_title: "Privado",
+      feature_private_desc: "No almacenamos tus imágenes. Los archivos se procesan en memoria y nunca se guardan en nuestros servidores.",
+      feature_free_title: "Gratuito",
+      feature_free_desc: "Sin tarjeta de crédito, sin registro, sin trucos. Generación gratuita de texto alternativo para uso diario.",
+      faq_title: "Preguntas Frecuentes",
+      faq_q1: "¿Qué es el texto alternativo?",
+      faq_a1: "El texto alternativo (alt text) es una descripción escrita de una imagen utilizada por lectores de pantalla y motores de búsqueda para comprender el contenido visual. Mejora la accesibilidad y el SEO.",
+      faq_q2: "¿QuickAlt es gratuito?",
+      faq_a2: "Sí. QuickAlt es gratuito para uso diario. Podemos introducir límites de uso justo para mantener el servicio disponible para todos.",
+      faq_q3: "¿Almacenan mis imágenes?",
+      faq_a3: "No. No almacenamos las imágenes subidas. Se procesan temporalmente para generar texto alternativo y se descartan inmediatamente.",
+      faq_q4: "¿Qué formatos de imagen se admiten?",
+      faq_a4: "QuickAlt admite archivos PNG, JPG/JPEG, WEBP y GIF de hasta 10MB por imagen.",
+      footer_about: "Acerca de",
+      footer_privacy: "Política de Privacidad",
+      footer_terms: "Términos de Servicio",
+      footer_copyright: '© <span id="year">2026</span> QuickAlt',
+      footer_badge: "No almacenamos tus imágenes.",
+      alert_invalid: "Por favor, sube un archivo de imagen válido (PNG, JPG, WEBP, GIF).",
+      alert_size: "El tamaño del archivo supera el límite de 10MB.",
+      generating_placeholder: "Generando texto alternativo, por favor espere...",
+      error_prefix: "Error: ",
+    },
+    fr: {
+      page_title: "QuickAlt - Générateur de Texte Alternatif IA Gratuit",
+      nav_about: "À propos",
+      nav_privacy: "Confidentialité",
+      nav_terms: "Conditions",
+      hero_title: "Générez du Texte Alternatif en Quelques Secondes",
+      hero_desc: "Générateur de texte alternatif gratuit pour images par IA. Glissez-déposez, cliquez pour télécharger et obtenez des descriptions accessibles instantanément. Aucune inscription requise.",
+      drop_text: 'Glissez-déposez votre image ou <span class="text-primary hover:underline">cliquez pour parcourir</span>',
+      drop_subtext: "Prend en charge PNG, JPG, WEBP, GIF jusqu'à 10 Mo",
+      output_lang: "Langue de Sortie",
+      result_label: "Texte Alternatif Généré",
+      status_ready: "Prêt",
+      status_generating: "Génération en cours...",
+      btn_regenerate: "Régénérer",
+      btn_copy: "Copier le Texte",
+      copied_feedback: "Copié !",
+      copied_failed: "Échec",
+      feature_fast_title: "Rapide",
+      feature_fast_desc: "Obtenez un texte alternatif descriptif en quelques secondes. Il suffit de télécharger une image et l'IA s'occupe du reste.",
+      feature_private_title: "Privé",
+      feature_private_desc: "Nous ne stockons pas vos images. Les fichiers sont traités en mémoire et jamais sauvegardés sur nos serveurs.",
+      feature_free_title: "Gratuit",
+      feature_free_desc: "Pas de carte de crédit, pas d'inscription, pas de surprise. Génération gratuite de texte alternatif pour un usage quotidien.",
+      faq_title: "Questions Fréquemment Posées",
+      faq_q1: "Qu'est-ce que le texte alternatif ?",
+      faq_a1: "Le texte alternatif (alt text) est une description écrite d'une image utilisée par les lecteurs d'écran et les moteurs de recherche pour comprendre le contenu visuel. Il améliore l'accessibilité et le référencement.",
+      faq_q2: "QuickAlt est-il gratuit ?",
+      faq_a2: "Oui. QuickAlt est gratuit pour un usage quotidien. Nous pouvons introduire des limites d'utilisation raisonnables pour garder le service disponible pour tous.",
+      faq_q3: "Stockez-vous mes images ?",
+      faq_a3: "Non. Nous ne stockons pas les images téléchargées. Elles sont traitées temporairement pour générer du texte alternatif et immédiatement supprimées.",
+      faq_q4: "Quels formats d'image sont pris en charge ?",
+      faq_a4: "QuickAlt prend en charge les fichiers PNG, JPG/JPEG, WEBP et GIF jusqu'à 10 Mo par image.",
+      footer_about: "À propos",
+      footer_privacy: "Politique de Confidentialité",
+      footer_terms: "Conditions d'Utilisation",
+      footer_copyright: '© <span id="year">2026</span> QuickAlt',
+      footer_badge: "Nous ne stockons pas vos images.",
+      alert_invalid: "Veuillez télécharger un fichier image valide (PNG, JPG, WEBP, GIF).",
+      alert_size: "La taille du fichier dépasse la limite de 10 Mo.",
+      generating_placeholder: "Génération du texte alternatif en cours, veuillez patienter...",
+      error_prefix: "Erreur : ",
+    },
+    de: {
+      page_title: "QuickAlt - Kostenloser KI-Alt-Text-Generator",
+      nav_about: "Über",
+      nav_privacy: "Datenschutz",
+      nav_terms: "Nutzungsbedingungen",
+      hero_title: "Generiere Alt-Text in Sekunden",
+      hero_desc: "Kostenloser KI-Alt-Text-Generator für Bilder. Ziehen und Ablegen, zum Hochladen klicken und sofort barrierefreie Beschreibungen erhalten. Keine Anmeldung erforderlich.",
+      drop_text: 'Bild hierher ziehen oder <span class="text-primary hover:underline">zum Durchsuchen klicken</span>',
+      drop_subtext: "Unterstützt PNG, JPG, WEBP, GIF bis zu 10 MB",
+      output_lang: "Ausgabesprache",
+      result_label: "Generierter Alt-Text",
+      status_ready: "Bereit",
+      status_generating: "Wird generiert...",
+      btn_regenerate: "Neu generieren",
+      btn_copy: "Text kopieren",
+      copied_feedback: "Kopiert!",
+      copied_failed: "Fehlgeschlagen",
+      feature_fast_title: "Schnell",
+      feature_fast_desc: "Erhalte beschreibenden Alt-Text in Sekunden. Einfach ein Bild hochladen und die KI erledigt den Rest.",
+      feature_private_title: "Privat",
+      feature_private_desc: "Wir speichern deine Bilder nicht. Dateien werden im Arbeitsspeicher verarbeitet und niemals auf unseren Servern gespeichert.",
+      feature_free_title: "Kostenlos",
+      feature_free_desc: "Keine Kreditkarte, keine Anmeldung, kein Haken. Kostenlose Alt-Text-Generierung für den täglichen Gebrauch.",
+      faq_title: "Häufig Gestellte Fragen",
+      faq_q1: "Was ist Alt-Text?",
+      faq_a1: "Alt-Text (alternativer Text) ist eine schriftliche Beschreibung eines Bildes, die von Screenreadern und Suchmaschinen verwendet wird, um visuelle Inhalte zu verstehen. Er verbessert die Barrierefreiheit und SEO.",
+      faq_q2: "Ist QuickAlt kostenlos?",
+      faq_a2: "Ja. QuickAlt ist für den täglichen Gebrauch kostenlos. Wir können faire Nutzungslimits einführen, um den Service für alle verfügbar zu halten.",
+      faq_q3: "Speichert ihr meine Bilder?",
+      faq_a3: "Nein. Wir speichern hochgeladene Bilder nicht. Sie werden vorübergehend verarbeitet, um Alt-Text zu generieren, und sofort verworfen.",
+      faq_q4: "Welche Bildformate werden unterstützt?",
+      faq_a4: "QuickAlt unterstützt PNG-, JPG-/JPEG-, WEBP- und GIF-Dateien bis zu 10 MB pro Bild.",
+      footer_about: "Über",
+      footer_privacy: "Datenschutzerklärung",
+      footer_terms: "Nutzungsbedingungen",
+      footer_copyright: '© <span id="year">2026</span> QuickAlt',
+      footer_badge: "Wir speichern deine Bilder nicht.",
+      alert_invalid: "Bitte lade eine gültige Bilddatei hoch (PNG, JPG, WEBP, GIF).",
+      alert_size: "Die Dateigröße überschreitet das Limit von 10 MB.",
+      generating_placeholder: "Alt-Text wird generiert, bitte warten...",
+      error_prefix: "Fehler: ",
+    },
+  };
+
+  function getT() {
+    const lang = document.getElementById('language-select').value;
+    return translations[lang] || translations.en;
+  }
+
+  function applyLanguage() {
+    const lang = document.getElementById('language-select').value;
+    const t = translations[lang] || translations.en;
+    if (t.page_title) document.title = t.page_title;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (!t[key]) return;
+      const val = t[key];
+      if (/<[a-z][\s\S]*>/i.test(val)) {
+        el.innerHTML = val;
+      } else {
+        el.textContent = val;
+      }
+    });
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  }
+
+  document.getElementById('language-select').addEventListener('change', applyLanguage);
+  applyLanguage();
+
       const dropZone = document.getElementById('drop-zone');
       const fileInput = document.getElementById('file-input');
       const resultSection = document.getElementById('result-section');
@@ -304,7 +586,7 @@
           loadingBadge.classList.add('inline-flex');
           statusBadge.classList.add('hidden');
           statusBadge.classList.remove('inline-flex');
-          altText.value = 'Generating alt text, please wait...';
+          altText.value = getT().generating_placeholder || 'Generating alt text, please wait...';
           copyBtn.disabled = true;
           regenerateBtn.disabled = true;
         } else {
@@ -358,18 +640,18 @@
           setGenerating(false);
           try { plausible && plausible('Alt Generated'); } catch (e) {}
         } catch (err) {
-          altText.value = "Error: " + (err.message || "Failed to generate alt text. Please try again.");
+          altText.value = (getT().error_prefix || "Error: ") + (err.message || "Failed to generate alt text. Please try again.");
           setGenerating(false);
         }
       }
 
       function handleFile(file) {
         if (!file || !file.type.startsWith('image/')) {
-          alert('Please upload a valid image file (PNG, JPG, WEBP, GIF).');
+          alert(getT().alert_invalid || 'Please upload a valid image file (PNG, JPG, WEBP, GIF).');
           return;
         }
         if (file.size > 10 * 1024 * 1024) {
-          alert('File size exceeds 10MB limit.');
+          alert(getT().alert_size || 'File size exceeds 10MB limit.');
           return;
         }
         const reader = new FileReader();
@@ -423,19 +705,19 @@
         altText.value = '';
         fileInput.value = '';
         resultSection.classList.add('hidden');
-        copyLabel.textContent = 'Copy Text';
+        copyLabel.textContent = (getT().btn_copy || 'Copy Text');
       });
 
       copyBtn.addEventListener('click', async () => {
         try {
           await navigator.clipboard.writeText(altText.value);
-          const prev = copyLabel.textContent;
-          copyLabel.textContent = 'Copied!';
-          setTimeout(() => { copyLabel.textContent = prev; }, 1500);
+          const prevKey = 'btn_copy';
+          copyLabel.textContent = getT().copied_feedback || 'Copied!';
+          setTimeout(() => { copyLabel.textContent = (getT()[prevKey] || 'Copy Text'); }, 1500);
           try { plausible && plausible('Copy Text'); } catch (e) {}
         } catch (err) {
-          copyLabel.textContent = 'Failed';
-          setTimeout(() => { copyLabel.textContent = 'Copy Text'; }, 1500);
+          copyLabel.textContent = getT().copied_failed || 'Failed';
+          setTimeout(() => { copyLabel.textContent = (getT().btn_copy || 'Copy Text'); }, 1500);
         }
       });
 
